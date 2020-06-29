@@ -23,14 +23,12 @@ public class CensusAnalyser {
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
             Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
             Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
-            int numOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(),false).count();
+            int numOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
             return numOfEateries;
         } catch (RuntimeException e) {
-            throw new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.RUN_TIME_EXCEPTION);
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.RUN_TIME_EXCEPTION);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
     }
 }
