@@ -1,5 +1,7 @@
-package com.bridgelabz.censusanalyser;
+package com.bridgelabz.censusanalyser.service;
 
+import com.bridgelabz.censusanalyser.model.IndiaCensusCSV;
+import com.bridgelabz.censusanalyser.exception.CensusAnalyserException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
