@@ -12,6 +12,7 @@ public class CensusAnalyserTest {
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_FILE_TYPE = "./src/test/resources/IndiaStateCensusData.xlsx";
 
+    /*Test Cases For Reading indiaStateCensusData.csv*/
     @Test
     public void givenIndianCensusCSVFile_ReturnsCorrectRecords() {
         try {
@@ -74,4 +75,6 @@ public class CensusAnalyserTest {
             Assert.assertEquals("Error capturing CSV header!",e.getMessage());
         }
     }
+
+    /*Test Cases For Reading IndiaStateCode.csv*/
 }
