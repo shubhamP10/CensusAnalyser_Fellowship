@@ -102,8 +102,6 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM, e.type);
         }
     }
-<<<<<<< HEAD
-=======
 
     @Test
     public void givenIndiaStateCodeFile_WithWrongFileType_ShouldThrowException() {
@@ -143,5 +141,4 @@ public class CensusAnalyserTest {
             Assert.assertEquals("Error capturing CSV header!", e.getMessage());
         }
     }
->>>>>>> develop
 }
