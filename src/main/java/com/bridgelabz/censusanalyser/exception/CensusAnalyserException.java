@@ -14,6 +14,11 @@ public class CensusAnalyserException extends Exception {
         this.type = type;
     }
 
+    public CensusAnalyserException(String message, String name) {
+        super(message);
+        this.type = ExceptionType.valueOf(name);
+    }
+
     public enum ExceptionType {
         CENSUS_FILE_PROBLEM, WRONG_FILE_TYPE, RUN_TIME_EXCEPTION, STATE_CODE_FILE_PROBLEM,UNABLE_TO_PARSE
     }
