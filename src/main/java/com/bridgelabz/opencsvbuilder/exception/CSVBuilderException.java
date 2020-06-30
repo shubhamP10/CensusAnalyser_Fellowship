@@ -1,4 +1,4 @@
-package com.bridgelabz.opencsvbuilder;
+package com.bridgelabz.opencsvbuilder.exception;
 
 public class CSVBuilderException extends Exception {
     public ExceptionType type;
@@ -9,6 +9,6 @@ public class CSVBuilderException extends Exception {
     }
 
     public enum ExceptionType {
-        CENSUS_FILE_PROBLEM, WRONG_FILE_TYPE, RUN_TIME_EXCEPTION, UNABLE_TO_PARSE
+        UNABLE_TO_PARSE
     }
 }
