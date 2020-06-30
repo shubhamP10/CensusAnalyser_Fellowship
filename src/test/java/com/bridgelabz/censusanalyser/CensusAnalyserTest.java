@@ -96,7 +96,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
+            censusAnalyser.loadStateCode(WRONG_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             System.out.println(e.getMessage());
             Assert.assertEquals(CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM, e.type);
@@ -109,7 +109,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaCensusData(WRONG_FILE_TYPE);
+            censusAnalyser.loadStateCode(WRONG_FILE_TYPE);
         } catch (CensusAnalyserException e) {
             System.out.println(e.getMessage());
             Assert.assertEquals(CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM, e.type);
@@ -122,7 +122,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            censusAnalyser.loadStateCode(STATE_CODE_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             System.out.println(e.getMessage());
             Assert.assertEquals(CensusAnalyserException.ExceptionType.RUN_TIME_EXCEPTION, e.type);
@@ -135,7 +135,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            censusAnalyser.loadStateCode(STATE_CODE_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             System.out.println(e.getMessage());
             Assert.assertEquals("Error capturing CSV header!", e.getMessage());
