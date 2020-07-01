@@ -18,7 +18,10 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
-    private static final String SAMPLE_JSON_PATH = "./sortedStateCensus.json";
+    private static final String SORTED_STATE_JSON = "./sortedStateCensus.json";
+    private static final String SORTED_POPULATION_JSON = "./sortedPopulationCensus.json";
+    private static final String REVERSED_POPULATION_JSON = "./reversedPopulationCensus.json";
+    private static final String REVERSED_AREA_JSON = "./reversedAreaCensus.json";
     List<IndiaCensusCSV> censusCSVList = null;
 
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
@@ -67,6 +70,7 @@ public class CensusAnalyser {
         Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.state);
         this.sort(censusCSVComparator);
         String sortedStateCensus = new Gson().toJson(censusCSVList);
+        this.jsonWriter(sortedStateCensus,SORTED_STATE_JSON);
         return sortedStateCensus;
 
     }
@@ -75,14 +79,26 @@ public class CensusAnalyser {
         if (censusCSVList == null || censusCSVList.size() == 0) {
             throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.state);
+        Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.population);
         this.sort(censusCSVComparator);
         String sortedStateCensus = new Gson().toJson(censusCSVList);
+        this.jsonWriter(sortedStateCensus,SORTED_POPULATION_JSON);
+        return sortedStateCensus;
+    }
+
+    public String getReversedPopulationWiseSortedCensusData() throws CensusAnalyserException {
+        if (censusCSVList == null || censusCSVList.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.population);
+        this.sort(censusCSVComparator.reversed());
+        String sortedStateCensus = new Gson().toJson(censusCSVList);
+        this.jsonWriter(sortedStateCensus,REVERSED_POPULATION_JSON);
         return sortedStateCensus;
     }
 
     public int getJSONCount(String filePath) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(SAMPLE_JSON_PATH));
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
         IndiaCensusCSV[] json = new Gson().fromJson(br, IndiaCensusCSV[].class);
         List<IndiaCensusCSV> indiaCensusCSVList = Arrays.asList(json);
         return indiaCensusCSVList.size();
