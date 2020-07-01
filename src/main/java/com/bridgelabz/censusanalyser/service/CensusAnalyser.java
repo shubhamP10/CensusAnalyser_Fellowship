@@ -81,7 +81,7 @@ public class CensusAnalyser {
         return sortedStateCensus;
     }
 
-    private int getJSONCount(String filePath) throws FileNotFoundException {
+    public int getJSONCount(String filePath) throws FileNotFoundException {
         BufferedReader br = new BufferedReader(new FileReader(SAMPLE_JSON_PATH));
         IndiaCensusCSV[] json = new Gson().fromJson(br, IndiaCensusCSV[].class);
         List<IndiaCensusCSV> indiaCensusCSVList = Arrays.asList(json);
