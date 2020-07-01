@@ -158,6 +158,5 @@ public class CensusAnalyserTest {
         } catch (CensusAnalyserException e) {
 
         }
-
     }
 }
