@@ -8,11 +8,10 @@ import com.bridgelabz.opencsvbuilder.CSVBuilderFactory;
 import com.bridgelabz.opencsvbuilder.ICSVBuilder;
 import com.google.gson.Gson;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -80,6 +79,13 @@ public class CensusAnalyser {
         this.sort(censusCSVComparator);
         String sortedStateCensus = new Gson().toJson(censusCSVList);
         return sortedStateCensus;
+    }
+
+    private int getJSONCount(String filePath) throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader(SAMPLE_JSON_PATH));
+        IndiaCensusCSV[] json = new Gson().fromJson(br, IndiaCensusCSV[].class);
+        List<IndiaCensusCSV> indiaCensusCSVList = Arrays.asList(json);
+        return indiaCensusCSVList.size();
     }
 
     private void jsonWriter(String jsonString, String filePath) throws CensusAnalyserException {
