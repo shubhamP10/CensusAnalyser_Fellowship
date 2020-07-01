@@ -97,6 +97,17 @@ public class CensusAnalyser {
         return sortedStateCensus;
     }
 
+    public String getReversedAreaWiseSortedCensusData() throws CensusAnalyserException {
+        if (censusCSVList == null || censusCSVList.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.areaInSqKm);
+        this.sort(censusCSVComparator.reversed());
+        String sortedStateCensus = new Gson().toJson(censusCSVList);
+        this.jsonWriter(sortedStateCensus,REVERSED_AREA_JSON);
+        return sortedStateCensus;
+    }
+
     public int getJSONCount(String filePath) throws FileNotFoundException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         IndiaCensusCSV[] json = new Gson().fromJson(br, IndiaCensusCSV[].class);
