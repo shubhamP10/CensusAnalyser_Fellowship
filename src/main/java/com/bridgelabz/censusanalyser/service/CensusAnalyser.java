@@ -80,7 +80,7 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.population);
-        this.sort(censusCSVComparator);
+        this.sort(censusCSVComparator.reversed());
         String sortedStateCensus = new Gson().toJson(censusCSVList);
         this.jsonWriter(sortedStateCensus,SORTED_POPULATION_JSON);
         return sortedStateCensus;
@@ -91,7 +91,7 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<IndiaCensusCSV> censusCSVComparator = Comparator.comparing(census -> census.population);
-        this.sort(censusCSVComparator.reversed());
+        this.sort(censusCSVComparator);
         String sortedStateCensus = new Gson().toJson(censusCSVList);
         this.jsonWriter(sortedStateCensus,REVERSED_POPULATION_JSON);
         return sortedStateCensus;

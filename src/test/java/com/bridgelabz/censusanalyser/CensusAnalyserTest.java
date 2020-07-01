@@ -186,4 +186,17 @@ public class CensusAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenIndianCensusData_WhenSortedOnReversedPopulation_ShouldReturnSortedResult() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            String sortedCensusData = censusAnalyser.getReversedPopulationWiseSortedCensusData();
+            IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+            assertEquals("Sikkim", censusCSV[0].state);
+        } catch (CensusAnalyserException e) {
+
+        }
+    }
 }
