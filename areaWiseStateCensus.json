@@ -2,34 +2,10 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 828,
-    "population": 199812341,
-    "area": 240928,
-    "state": "Uttar Pradesh"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 365,
-    "population": 112372972,
-    "area": 307713,
-    "state": "Maharashtra"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 1102,
-    "population": 103804637,
-    "area": 94163,
-    "state": "Bihar"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 1029,
-    "population": 91347736,
-    "area": 88752,
-    "state": "West Bengal"
+    "densityPerSqKm": 201,
+    "population": 68621012,
+    "area": 342239,
+    "state": "Rajasthan"
   },
   {
     "srNo": 0,
@@ -42,26 +18,26 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 555,
-    "population": 72138958,
-    "area": 130058,
-    "state": "Tamil Nadu"
+    "densityPerSqKm": 365,
+    "population": 112372972,
+    "area": 307713,
+    "state": "Maharashtra"
   },
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 201,
-    "population": 68621012,
-    "area": 342239,
-    "state": "Rajasthan"
+    "densityPerSqKm": 828,
+    "population": 199812341,
+    "area": 240928,
+    "state": "Uttar Pradesh"
   },
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 319,
-    "population": 61130704,
-    "area": 191791,
-    "state": "Karnataka"
+    "densityPerSqKm": 57,
+    "population": 12548926,
+    "area": 222236,
+    "state": "Jammu and Kashmir"
   },
   {
     "srNo": 0,
@@ -70,6 +46,14 @@
     "population": 60383628,
     "area": 196024,
     "state": "Gujarat"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 319,
+    "population": 61130704,
+    "area": 191791,
+    "state": "Karnataka"
   },
   {
     "srNo": 0,
@@ -90,6 +74,22 @@
   {
     "srNo": 0,
     "tin": 0,
+    "densityPerSqKm": 189,
+    "population": 25540196,
+    "area": 135191,
+    "state": "Chattisgarh"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 555,
+    "population": 72138958,
+    "area": 130058,
+    "state": "Tamil Nadu"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
     "densityPerSqKm": 307,
     "population": 35286757,
     "area": 114840,
@@ -98,10 +98,18 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 859,
-    "population": 33387677,
-    "area": 38863,
-    "state": "Kerala"
+    "densityPerSqKm": 1102,
+    "population": 103804637,
+    "area": 94163,
+    "state": "Bihar"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 1029,
+    "population": 91347736,
+    "area": 88752,
+    "state": "West Bengal"
   },
   {
     "srNo": 0,
@@ -122,34 +130,10 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 550,
-    "population": 27704236,
-    "area": 50362,
-    "state": "Punjab"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 189,
-    "population": 25540196,
-    "area": 135191,
-    "state": "Chattisgarh"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 573,
-    "population": 25353081,
-    "area": 44212,
-    "state": "Haryana"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 57,
-    "population": 12548926,
-    "area": 222236,
-    "state": "Jammu and Kashmir"
+    "densityPerSqKm": 123,
+    "population": 6864602,
+    "area": 55673,
+    "state": "Himachal Pradesh"
   },
   {
     "srNo": 0,
@@ -162,18 +146,26 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 123,
-    "population": 6864602,
-    "area": 55673,
-    "state": "Himachal Pradesh"
+    "densityPerSqKm": 550,
+    "population": 27704236,
+    "area": 50362,
+    "state": "Punjab"
   },
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 350,
-    "population": 3671032,
-    "area": 10486,
-    "state": "Tripura"
+    "densityPerSqKm": 573,
+    "population": 25353081,
+    "area": 44212,
+    "state": "Haryana"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 859,
+    "population": 33387677,
+    "area": 38863,
+    "state": "Kerala"
   },
   {
     "srNo": 0,
@@ -194,18 +186,10 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 119,
-    "population": 1980602,
-    "area": 16579,
-    "state": "Nagaland"
-  },
-  {
-    "srNo": 0,
-    "tin": 0,
-    "densityPerSqKm": 394,
-    "population": 1457723,
-    "area": 3702,
-    "state": "Goa"
+    "densityPerSqKm": 52,
+    "population": 1091014,
+    "area": 21081,
+    "state": "Mizoram"
   },
   {
     "srNo": 0,
@@ -218,10 +202,18 @@
   {
     "srNo": 0,
     "tin": 0,
-    "densityPerSqKm": 52,
-    "population": 1091014,
-    "area": 21081,
-    "state": "Mizoram"
+    "densityPerSqKm": 119,
+    "population": 1980602,
+    "area": 16579,
+    "state": "Nagaland"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 350,
+    "population": 3671032,
+    "area": 10486,
+    "state": "Tripura"
   },
   {
     "srNo": 0,
@@ -230,5 +222,13 @@
     "population": 607688,
     "area": 7096,
     "state": "Sikkim"
+  },
+  {
+    "srNo": 0,
+    "tin": 0,
+    "densityPerSqKm": 394,
+    "population": 1457723,
+    "area": 3702,
+    "state": "Goa"
   }
 ]
