@@ -258,4 +258,43 @@ public class CensusAnalyserTest {
             System.out.println("ERROR");
         }
     }
+
+    @Test
+    public void givenUSCensusData_SortedByPopulationDensity_ShouldReturn_SortedValues() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
+            String sortedCensusData = censusAnalyser.getPopulationDensityWiseSortedCensusDataForUS();
+            USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
+            Assert.assertThat(censusCSV[0].state, CoreMatchers.is("District of Columbia"));
+        } catch (CensusAnalyserException e) {
+            System.out.println("ERROR");
+        }
+    }
+
+    @Test
+    public void givenUSCensusData_SortedByArea_ShouldReturn_SortedValues() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
+            String sortedCensusData = censusAnalyser.getAreaWiseSortedCensusDataForUS();
+            USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
+            Assert.assertThat(censusCSV[0].state, CoreMatchers.is("Alaska"));
+        } catch (CensusAnalyserException e) {
+            System.out.println("ERROR");
+        }
+    }
+
+    @Test
+    public void givenUSCensusData_SortedByWaterArea_ShouldReturn_SortedValues() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
+            String sortedCensusData = censusAnalyser.getWaterAreaWiseSortedCensusDataForUS();
+            USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
+            Assert.assertThat(censusCSV[0].state, CoreMatchers.is("Alaska"));
+        } catch (CensusAnalyserException e) {
+            System.out.println("ERROR");
+        }
+    }
 }

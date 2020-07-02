@@ -135,6 +135,45 @@ public class CensusAnalyser {
         return sortedData;
     }
 
+    /*Method to get US Population Density Wise Sorted Census Data*/
+    public String getPopulationDensityWiseSortedCensusDataForUS() throws CensusAnalyserException {
+        if (usCensusMap == null || usCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<USCensusDAO> censusCSVComparator = Comparator.comparing(census -> census.populationDensity);
+        List<USCensusDAO> censusDAOList = new ArrayList<>(usCensusMap.values());
+        this.sort(censusDAOList, censusCSVComparator.reversed());
+        String sortedData = new Gson().toJson(censusDAOList);
+        this.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return sortedData;
+    }
+
+    /*Method to get US Area Wise Sorted Census Data*/
+    public String getAreaWiseSortedCensusDataForUS() throws CensusAnalyserException {
+        if (usCensusMap == null || usCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<USCensusDAO> censusCSVComparator = Comparator.comparing(census -> census.totalArea);
+        List<USCensusDAO> censusDAOList = new ArrayList<>(usCensusMap.values());
+        this.sort(censusDAOList, censusCSVComparator.reversed());
+        String sortedData = new Gson().toJson(censusDAOList);
+        this.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return sortedData;
+    }
+
+    /*Method to get US Water Area Wise Sorted Census Data*/
+    public String getWaterAreaWiseSortedCensusDataForUS() throws CensusAnalyserException {
+        if (usCensusMap == null || usCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<USCensusDAO> censusCSVComparator = Comparator.comparing(census -> census.waterArea);
+        List<USCensusDAO> censusDAOList = new ArrayList<>(usCensusMap.values());
+        this.sort(censusDAOList, censusCSVComparator.reversed());
+        String sortedData = new Gson().toJson(censusDAOList);
+        this.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return sortedData;
+    }
+
     /*Method to get Population Wise Census Data in Reverse Order*/
     public String getDensityWisePopulationSortedCensusData() throws CensusAnalyserException {
         if (indiaCensusMap == null || indiaCensusMap.size() == 0) {
