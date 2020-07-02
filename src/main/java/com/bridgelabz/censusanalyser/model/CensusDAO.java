@@ -8,13 +8,13 @@ public class CensusDAO {
     public String stateCode;
     public String stateName;
 
-//    IndianCensusCSV Fileds
+    //    IndianCensusCSV Fileds
     public int densityPerSqKm;
     public int population;
     public int area;
     public String state;
 
-//    USCensusCSV Fields
+    //    USCensusCSV Fields
     private int housingUnits;
     private float populationDensity;
     private float waterArea;
