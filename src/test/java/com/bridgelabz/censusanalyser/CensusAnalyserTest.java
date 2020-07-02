@@ -192,9 +192,9 @@ public class CensusAnalyserTest {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
-            String sortedCensusData = censusAnalyser.getReversedPopulationWiseSortedCensusData();
+            String sortedCensusData = censusAnalyser.getDensityWisePopulationSortedCensusData();
             IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
-            assertEquals("Sikkim", censusCSV[0].state);
+            assertEquals("Bihar", censusCSV[0].state);
         } catch (CensusAnalyserException e) {
 
         }
@@ -220,10 +220,15 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             int numOfRecords = censusAnalyser.loadStateCode(STATE_CODE_CSV_FILE_PATH);
-            assertEquals(29, numOfRecords);
+            assertEquals(37, numOfRecords);
             System.out.println("COUNT : " + numOfRecords);
         } catch (CensusAnalyserException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.type);
+            e.printStackTrace();
+
         }
     }
+
+    //  RF 7
+
 }
