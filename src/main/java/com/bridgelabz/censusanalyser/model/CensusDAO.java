@@ -14,17 +14,6 @@ public class CensusDAO {
     public int area;
     public String state;
 
-    //    USCensusCSV Fields
-    private int housingUnits;
-    private float populationDensity;
-    private float waterArea;
-    private float landArea;
-    private float totalArea;
-    private float housingDensity;
-    private int usPopulation;
-    private String usState;
-    private String stateID;
-
     public CensusDAO(IndiaCensusCSV indiaCensusCSV) {
         state = indiaCensusCSV.state;
         area = indiaCensusCSV.areaInSqKm;
@@ -37,18 +26,5 @@ public class CensusDAO {
         stateCode = indiaStateCodeCSV.stateCode;
         tin = indiaStateCodeCSV.tin;
         srNo = indiaStateCodeCSV.srNo;
-    }
-
-    public CensusDAO(USCensusCSV usCensusCSV) {
-        stateID = usCensusCSV.stateID;
-        usState = usCensusCSV.state;
-        usPopulation = usCensusCSV.population;
-        housingDensity = usCensusCSV.housingDensity;
-        totalArea = usCensusCSV.totalArea;
-        landArea = usCensusCSV.landArea;
-        waterArea = usCensusCSV.waterArea;
-        populationDensity = usCensusCSV.populationDensity;
-        housingUnits = usCensusCSV.housingUnits;
-
     }
 }

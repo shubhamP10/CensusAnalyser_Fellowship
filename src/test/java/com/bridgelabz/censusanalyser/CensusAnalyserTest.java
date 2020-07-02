@@ -2,8 +2,11 @@ package com.bridgelabz.censusanalyser;
 
 import com.bridgelabz.censusanalyser.exception.CensusAnalyserException;
 import com.bridgelabz.censusanalyser.model.IndiaCensusCSV;
+import com.bridgelabz.censusanalyser.model.USCensusCSV;
 import com.bridgelabz.censusanalyser.service.CensusAnalyser;
 import com.google.gson.Gson;
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
@@ -243,4 +246,16 @@ public class CensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenUSCensusData_SortedByPopulationWise_ShouldReturn_SortedValues() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
+            String sortedCensusData = censusAnalyser.getPopulationWiseSortedCensusDataForUS();
+            USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
+            Assert.assertThat(censusCSV[0].state, CoreMatchers.is("California"));
+        } catch (CensusAnalyserException e) {
+            System.out.println("ERROR");
+        }
+    }
 }

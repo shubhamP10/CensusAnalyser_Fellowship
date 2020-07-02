@@ -1,10 +1,7 @@
 package com.bridgelabz.censusanalyser.service;
 
 import com.bridgelabz.censusanalyser.exception.CensusAnalyserException;
-import com.bridgelabz.censusanalyser.model.CensusDAO;
-import com.bridgelabz.censusanalyser.model.IndiaCensusCSV;
-import com.bridgelabz.censusanalyser.model.IndiaStateCodeCSV;
-import com.bridgelabz.censusanalyser.model.USCensusCSV;
+import com.bridgelabz.censusanalyser.model.*;
 import com.bridgelabz.opencsvbuilder.CSVBuilderException;
 import com.bridgelabz.opencsvbuilder.CSVBuilderFactory;
 import com.bridgelabz.opencsvbuilder.ICSVBuilder;
@@ -17,14 +14,15 @@ import java.util.*;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
-    private static final String SORTED_STATE_JSON = "./sortedStateCensus.json";
-    private static final String SORTED_POPULATION_JSON = "./sortedPopulationCensus.json";
-    private static final String REVERSED_POPULATION_JSON = "./densityWisePopulation.json";
-    private static final String AREA_WISE_STATE_JSON = "./areaWiseStateCensus.json";
+    private static final String SORTED_STATE_JSON = "./json/sortedStateCensus.json";
+    private static final String SORTED_POPULATION_JSON = "./json/sortedPopulationCensus.json";
+    private static final String REVERSED_POPULATION_JSON = "./json/densityWisePopulation.json";
+    private static final String AREA_WISE_STATE_JSON = "./json/areaWiseStateCensus.json";
+    private static final String SORTED_US_POPULATION_JSON = "./json/usPopulationWise.json";
 
     Map<String, CensusDAO> stateCodeMap;
     Map<String, CensusDAO> indiaCensusMap;
-    Map<String, CensusDAO> usCensusMap;
+    Map<String, USCensusDAO> usCensusMap;
 
     public CensusAnalyser() {
         this.indiaCensusMap = new HashMap<>();
@@ -60,7 +58,7 @@ public class CensusAnalyser {
             Iterator<USCensusCSV> censusCSVIterator = csvBuilder.getOpenCSVFileIterator(reader, USCensusCSV.class);
             Iterable<USCensusCSV> usCensusCSVS = () -> censusCSVIterator;
             StreamSupport.stream(usCensusCSVS.spliterator(), false)
-                    .forEach(csvCensus -> this.usCensusMap.put(csvCensus.state, new CensusDAO(csvCensus)));
+                    .forEach(csvCensus -> this.usCensusMap.put(csvCensus.state, new USCensusDAO(csvCensus)));
             return usCensusMap.size();
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -124,6 +122,19 @@ public class CensusAnalyser {
         return sortedData;
     }
 
+    /*Method to get US Population Wise Sorted Census Data*/
+    public String getPopulationWiseSortedCensusDataForUS() throws CensusAnalyserException {
+        if (usCensusMap == null || usCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<USCensusDAO> censusCSVComparator = Comparator.comparing(census -> census.usPopulation);
+        List<USCensusDAO> censusDAOList = new ArrayList<>(usCensusMap.values());
+        this.sort(censusDAOList, censusCSVComparator.reversed());
+        String sortedData = new Gson().toJson(censusDAOList);
+        this.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return sortedData;
+    }
+
     /*Method to get Population Wise Census Data in Reverse Order*/
     public String getDensityWisePopulationSortedCensusData() throws CensusAnalyserException {
         if (indiaCensusMap == null || indiaCensusMap.size() == 0) {
@@ -176,11 +187,11 @@ public class CensusAnalyser {
     /*Method to sort Census Data
      * @param Comparator Object
      * */
-    private void sort(List<CensusDAO> censusDAOList, Comparator<CensusDAO> censusCSVComparator) {
+    private <E> void sort(List<E> censusDAOList, Comparator<E> censusCSVComparator) {
         for (int i = 0; i < censusDAOList.size(); i++) {
             for (int j = 0; j < censusDAOList.size() - i - 1; j++) {
-                CensusDAO censusCSV = censusDAOList.get(j);
-                CensusDAO censusCSV1 = censusDAOList.get(j + 1);
+                E censusCSV = censusDAOList.get(j);
+                E censusCSV1 = censusDAOList.get(j + 1);
                 if (censusCSVComparator.compare(censusCSV, censusCSV1) > 0) {
                     censusDAOList.set(j, censusCSV1);
                     censusDAOList.set(j + 1, censusCSV);
