@@ -2,29 +2,33 @@ package com.bridgelabz.censusanalyser.model;
 
 public class CensusDAO {
 
-    //    StateCodeCSV Fields
-    public int srNo;
-    public int tin;
-    public String stateCode;
-    public String stateName;
-
-    //    IndianCensusCSV Fileds
-    public int densityPerSqKm;
-    public int population;
-    public int area;
     public String state;
+    public String stateCode;
+    public int population;
+    public double populationDensity;
+    public double totalArea;
 
     public CensusDAO(IndiaCensusCSV indiaCensusCSV) {
         state = indiaCensusCSV.state;
-        area = indiaCensusCSV.areaInSqKm;
+        totalArea = indiaCensusCSV.areaInSqKm;
         population = indiaCensusCSV.population;
-        densityPerSqKm = indiaCensusCSV.densityPerSqKm;
+        populationDensity = indiaCensusCSV.densityPerSqKm;
     }
 
-    public CensusDAO(IndiaStateCodeCSV indiaStateCodeCSV) {
-        stateName = indiaStateCodeCSV.stateName;
-        stateCode = indiaStateCodeCSV.stateCode;
-        tin = indiaStateCodeCSV.tin;
-        srNo = indiaStateCodeCSV.srNo;
+    public CensusDAO(USCensusCSV usCensusCSV) {
+        stateCode = usCensusCSV.stateID;
+        state = usCensusCSV.state;
+        population = usCensusCSV.population;
+        totalArea = usCensusCSV.totalArea;
+        populationDensity = usCensusCSV.populationDensity;
     }
+
+    public CensusDAO(IndiaStateCodeCSV csvCensus) {
+        stateCode = csvCensus.stateCode;
+        state = csvCensus.stateName;
+    }
+
+//    public IndiaCensusCSV getIndiaCensusCSV() {
+//        return new IndiaCensusCSV(state, population, (int) populationDensity, (int) totalArea);
+//    }
 }
