@@ -22,13 +22,4 @@ public class CensusDAO {
         totalArea = usCensusCSV.totalArea;
         populationDensity = usCensusCSV.populationDensity;
     }
-
-    public CensusDAO(IndiaStateCodeCSV csvCensus) {
-        stateCode = csvCensus.stateCode;
-        state = csvCensus.stateName;
-    }
-
-//    public IndiaCensusCSV getIndiaCensusCSV() {
-//        return new IndiaCensusCSV(state, population, (int) populationDensity, (int) totalArea);
-//    }
 }
