@@ -25,6 +25,7 @@ public class CensusAnalyserTest {
     private static final String WRONG_DELIMITER_CSV_FILE_PATH = "./src/test/resources/WrongDelimiterIndiaStateCensusData.csv";
     private static final String WRONG_DELIMITER_STATE_CSV_FILE_PATH = "./src/test/resources/WrongDelimiterIndiaStateCode.csv";
     private static final String WRONG_HEADER_STATE_CSV_FILE_PATH = "./src/test/resources/WrongHeaderIndiaStateCode.csv";
+
     /*Test Cases For Reading indiaStateCensusData.csv*/
     @Test
     public void givenIndianCensusCSVFile_ReturnsCorrectRecords() {
@@ -96,8 +97,9 @@ public class CensusAnalyserTest {
     public void givenIndianStateCodeFile_ShouldReturn_CorrectRecords() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             int numOfRecords = censusAnalyser.loadStateCode(STATE_CODE_CSV_FILE_PATH);
-            assertEquals(37, numOfRecords);
+            assertEquals(29, numOfRecords);
             System.out.println("Pass 6");
         } catch (CensusAnalyserException e) {
         }
@@ -193,7 +195,7 @@ public class CensusAnalyserTest {
             assertEquals(29, count);
             System.out.println("Pass 13");
         } catch (FileNotFoundException e) {
-            System.out.println("Exception 13: "+e.getMessage());
+            System.out.println("Exception 13: " + e.getMessage());
         }
     }
 
@@ -207,7 +209,7 @@ public class CensusAnalyserTest {
             assertEquals("Bihar", censusCSV[0].state);
             System.out.println("Pass 14");
         } catch (CensusAnalyserException e) {
-            System.out.println("Exception 14: "+e.getMessage());
+            System.out.println("Exception 14: " + e.getMessage());
         }
     }
 
@@ -225,22 +227,6 @@ public class CensusAnalyserTest {
         }
     }
 
-    //    RF 6
-    @Test
-    public void givenIndianStateCSV_ShouldReturn_CorrectRecords() {
-        try {
-            CensusAnalyser censusAnalyser = new CensusAnalyser();
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
-            int numOfRecords = censusAnalyser.loadStateCode(STATE_CODE_CSV_FILE_PATH);
-            assertEquals(37, numOfRecords);
-            System.out.println("Pass 16");
-        } catch (CensusAnalyserException e) {
-            System.out.println(e.type);
-            e.printStackTrace();
-
-        }
-    }
-
     //  For US Census Data
     @Test
     public void givenUSCensusCSVFile_ReturnsCorrectRecords() {
@@ -248,7 +234,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             int numOfRecords = censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
             assertEquals(51, numOfRecords);
-            System.out.println("Pass 17");
+            System.out.println("Pass 16");
         } catch (CensusAnalyserException e) {
             System.out.println(e.getMessage());
         }
@@ -262,7 +248,7 @@ public class CensusAnalyserTest {
             String sortedCensusData = censusAnalyser.getPopulationWiseSortedCensusDataForUS();
             USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
             Assert.assertThat(censusCSV[0].state, CoreMatchers.is("California"));
-            System.out.println("Pass 18");
+            System.out.println("Pass 17");
         } catch (CensusAnalyserException e) {
         }
     }
@@ -275,7 +261,7 @@ public class CensusAnalyserTest {
             String sortedCensusData = censusAnalyser.getPopulationDensityWiseSortedCensusDataForUS();
             USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
             Assert.assertThat(censusCSV[0].state, CoreMatchers.is("District of Columbia"));
-            System.out.println("Pass 19");
+            System.out.println("Pass 18");
         } catch (CensusAnalyserException e) {
         }
     }
@@ -288,8 +274,11 @@ public class CensusAnalyserTest {
             String sortedCensusData = censusAnalyser.getAreaWiseSortedCensusDataForUS();
             USCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, USCensusCSV[].class);
             Assert.assertThat(censusCSV[0].state, CoreMatchers.is("Alaska"));
-            System.out.println("Pass 20");
+            System.out.println("Pass 19");
         } catch (CensusAnalyserException e) {
         }
     }
+
+//    uc 11
+
 }
