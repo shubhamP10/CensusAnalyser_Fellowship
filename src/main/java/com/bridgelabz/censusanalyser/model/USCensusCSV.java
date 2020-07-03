@@ -12,23 +12,10 @@ public class USCensusCSV {
     @CsvBindByName(column = "Population", required = true)
     public int population;
 
-    @CsvBindByName(column = "Housing units", required = true)
-    public int housingUnits;
-
     @CsvBindByName(column = "Total area", required = true)
-    public float totalArea;
-
-    @CsvBindByName(column = "Water area", required = true)
-    public float waterArea;
-
-    @CsvBindByName(column = "Land area", required = true)
-    public float landArea;
+    public double totalArea;
 
     @CsvBindByName(column = "Population Density", required = true)
-    public float populationDensity;
-
-    @CsvBindByName(column = "Housing Density", required = true)
-    public float housingDensity;
-
+    public double populationDensity;
 
 }
