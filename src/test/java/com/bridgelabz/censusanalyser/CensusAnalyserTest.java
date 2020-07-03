@@ -191,7 +191,7 @@ public class CensusAnalyserTest {
     public void givenIndianCensusSortedData_WhenSortedOnState_ShouldReturnCount() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
-            int count = censusAnalyser.getJSONCount("./json/sortedStateCensus.json");
+            int count = censusAnalyser.getJSONCount("./json/indiaSortedStateCensus.json");
             assertEquals(29, count);
             System.out.println("Pass 13");
         } catch (FileNotFoundException e) {
@@ -281,4 +281,13 @@ public class CensusAnalyserTest {
 
 //    uc 11
 
+    @Test
+    public void getMostPopulusStateFromIndiaAndUS() throws CensusAnalyserException {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        censusAnalyser.loadUSCensusData(US_CENSUS_CSV_PATH);
+        censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+        String[] data = censusAnalyser.getMostPopulusStateByDensityForIndAndUS();
+        Assert.assertEquals("Bihar",data[0]);
+        Assert.assertEquals("District of Columbia",data[1]);
+    }
 }
