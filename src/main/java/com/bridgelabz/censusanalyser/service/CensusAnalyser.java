@@ -58,12 +58,14 @@ public class CensusAnalyser {
                 StreamSupport.stream(censusCSV.spliterator(), false)
                         .map(IndiaCensusCSV.class::cast)
                         .forEach(csvCensus -> this.indiaCensusMap.put(csvCensus.state, new CensusDAO(csvCensus)));
+                return indiaCensusMap.size();
             } else if (className.equals("USCensusCSV")) {
                 StreamSupport.stream(censusCSV.spliterator(), false)
                         .map(USCensusCSV.class::cast)
-                        .forEach(csvCensus -> this.indiaCensusMap.put(csvCensus.state, new CensusDAO(csvCensus)));
+                        .forEach(csvCensus -> this.usCensusMap.put(csvCensus.state, new CensusDAO(csvCensus)));
+                return usCensusMap.size();
             }
-            return indiaCensusMap.size();
+            return 0;
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.RUN_TIME_EXCEPTION);
@@ -96,6 +98,21 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),
                     e.type.name());
         }
+    }
+
+    /*Method to get US and Indian state for Most population by density */
+    public String[] getMostPopulusStateByDensityForIndAndUS() throws CensusAnalyserException {
+        if (indiaCensusMap == null || indiaCensusMap.size() == 0 && usCensusMap == null || usCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        String usData = getPopulationDensityWiseSortedCensusDataForUS();
+        String indiaData = getDensityWisePopulationSortedCensusData();
+        IndiaCensusCSV[] sortedIndData = new Gson().fromJson(indiaData, IndiaCensusCSV[].class);
+        USCensusCSV[] sortedUSData = new Gson().fromJson(usData, USCensusCSV[].class);
+        String mostPopulusByDensityIND = sortedIndData[0].state;
+        String mostPopulusByDensityUS = sortedUSData[0].state;
+        String[] returnData = {mostPopulusByDensityIND,mostPopulusByDensityUS};
+        return returnData;
     }
 
     /*Method to get State Wise Sorted Census Data*/
