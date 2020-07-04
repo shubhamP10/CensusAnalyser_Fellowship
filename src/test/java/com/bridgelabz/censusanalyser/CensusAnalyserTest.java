@@ -114,7 +114,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadStateCode(WRONG_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             System.out.println("Pass 7");
-            assertEquals(CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM, e.type);
+            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
 
@@ -127,7 +127,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadStateCode(WRONG_FILE_TYPE);
         } catch (CensusAnalyserException e) {
             System.out.println("Pass 8");
-            assertEquals(CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM, e.type);
+            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
 
@@ -196,6 +196,16 @@ public class CensusAnalyserTest {
             System.out.println("Pass 13");
         } catch (FileNotFoundException e) {
             System.out.println("Exception 13: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenIndianCensusSortedData_WhenWrongJsonFile_ShouldThrowException() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.getJSONCount("./json/SortedStateCensus.json");
+        } catch (FileNotFoundException e) {
+            System.out.println("Exception 13b: " + e.getMessage());
         }
     }
 
