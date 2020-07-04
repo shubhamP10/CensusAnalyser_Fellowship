@@ -16,6 +16,6 @@ public class CensusAnalyserException extends Exception {
 
     public enum ExceptionType {
         CENSUS_FILE_PROBLEM, JSON_WRITE_ERROR, RUN_TIME_EXCEPTION,
-        STATE_CODE_FILE_PROBLEM, INDEX_OUT_OF_BOUND, NO_CENSUS_DATA
+        STATE_CODE_FILE_PROBLEM, FILE_NOT_FOUND, NO_CENSUS_DATA
     }
 }
