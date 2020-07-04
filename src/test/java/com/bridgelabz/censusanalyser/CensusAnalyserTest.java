@@ -1,9 +1,9 @@
 package com.bridgelabz.censusanalyser;
 
+import com.bridgelabz.censusanalyser.service.CensusAnalyser;
 import com.bridgelabz.censusanalyser.exception.CensusAnalyserException;
 import com.bridgelabz.censusanalyser.model.IndiaCensusCSV;
 import com.bridgelabz.censusanalyser.model.USCensusCSV;
-import com.bridgelabz.censusanalyser.service.CensusAnalyser;
 import com.google.gson.Gson;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
