@@ -19,6 +19,15 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 public class CensusLoader {
+    public Map<String, CensusDAO> loadCensusData(CensusAnalyser.Country country, String... csvFilePath) throws CensusAnalyserException {
+        if (country.equals(CensusAnalyser.Country.INDIA)) {
+            return this.loadCensusData(IndiaCensusCSV.class, csvFilePath);
+        } else if (country.equals(CensusAnalyser.Country.US)) {
+            return this.loadCensusData(USCensusCSV.class, csvFilePath);
+        } else
+            throw new CensusAnalyserException("Incorrect Country", CensusAnalyserException.ExceptionType.INVALID_COUNTRY);
+    }
+
     /**
      * Generic Method To Load India Census, US Census And India State Code To The Map
      *
@@ -28,7 +37,7 @@ public class CensusLoader {
      * @return count of Each File Data
      * @throws CensusAnalyserException
      */
-    public <E> Map<String, CensusDAO> loadCensusData(Class<E> censusCSVClass, String... csvFilePath) throws CensusAnalyserException {
+    private <E> Map<String, CensusDAO> loadCensusData(Class<E> censusCSVClass, String... csvFilePath) throws CensusAnalyserException {
         Map<String, CensusDAO> censusMap = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath[0]))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
@@ -48,7 +57,7 @@ public class CensusLoader {
                     break;
             }
             if (csvFilePath.length == 1) return censusMap;
-            this.loadStateCodeData(csvFilePath[1],censusMap);
+            this.loadStateCodeData(csvFilePath[1], censusMap);
             return censusMap;
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -62,7 +71,7 @@ public class CensusLoader {
         }
     }
 
-    private int loadStateCodeData(String csvFilePath, Map<String, CensusDAO> indiaCensusMap) throws CensusAnalyserException {
+    private void loadStateCodeData(String csvFilePath, Map<String, CensusDAO> indiaCensusMap) throws CensusAnalyserException, CSVBuilderException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator stateCSVIterator = csvBuilder.getOpenCSVFileIterator(reader, IndiaStateCodeCSV.class);
@@ -70,16 +79,13 @@ public class CensusLoader {
             StreamSupport.stream(stateCodeIterable.spliterator(), false)
                     .filter(csvState -> indiaCensusMap.get(csvState.stateName) != null)
                     .forEach(csvState -> indiaCensusMap.get(csvState.stateName).stateCode = csvState.stateCode);
-            return indiaCensusMap.size();
+            indiaCensusMap.size();
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.RUN_TIME_EXCEPTION);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.STATE_CODE_FILE_PROBLEM);
-        } catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    e.type.name());
         }
     }
 }
