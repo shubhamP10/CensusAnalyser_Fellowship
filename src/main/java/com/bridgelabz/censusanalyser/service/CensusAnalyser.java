@@ -24,12 +24,10 @@ public class CensusAnalyser {
     private static final String SORTED_US_POPULATION_DENSITY_JSON = "./json/usPopulationDensityWise.json";
     private static final String SORTED_US_AREA_JSON = "./json/usAreaWise.json";
 
-    Map<String, CensusDAO> censusDAOMap = null;
     Map<String, CensusDAO> censusMap = null;
     public enum Country {INDIA, US}
     private Country country;
 
-    ;
     public CensusAnalyser(Country country) {
         this.country = country;
     }

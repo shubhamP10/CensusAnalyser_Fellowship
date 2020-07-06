@@ -9,6 +9,7 @@ import java.util.Map;
 public class CensusAdapterFactory {
     /**
      * METHOD TO INVOKE THE CENSUS ADAPTER AS PER COUNTRY
+     *
      * @param country provides country to load data
      * @return object of a required adapter class
      * @throws CensusAnalyserException while handling the occurred exception
