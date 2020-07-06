@@ -3,19 +3,14 @@ package com.bridgelabz.censusanalyser.service;
 import com.bridgelabz.censusanalyser.exception.CensusAnalyserException;
 import com.bridgelabz.censusanalyser.model.CensusDAO;
 import com.bridgelabz.censusanalyser.model.IndiaCensusCSV;
-import com.bridgelabz.censusanalyser.model.IndiaStateCodeCSV;
 import com.bridgelabz.censusanalyser.model.USCensusCSV;
 import com.bridgelabz.censusanalyser.utility.CensusUtility;
-import com.bridgelabz.opencsvbuilder.CSVBuilderException;
-import com.bridgelabz.opencsvbuilder.CSVBuilderFactory;
-import com.bridgelabz.opencsvbuilder.ICSVBuilder;
 import com.google.gson.Gson;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
-import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
     private static final String SORTED_STATE_JSON = "./json/indiaSortedStateCensus.json";
@@ -25,7 +20,6 @@ public class CensusAnalyser {
     private static final String SORTED_US_POPULATION_JSON = "./json/usPopulationWise.json";
     private static final String SORTED_US_POPULATION_DENSITY_JSON = "./json/usPopulationDensityWise.json";
     private static final String SORTED_US_AREA_JSON = "./json/usAreaWise.json";
-
 
     Map<String, CensusDAO> censusDAOMap;
     Map<String, CensusDAO> indiaCensusMap;
@@ -38,21 +32,21 @@ public class CensusAnalyser {
     }
 
     /*Method To Load India Census Data*/
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
-        indiaCensusMap = new CensusLoader().loadCensusData(csvFilePath, IndiaCensusCSV.class);
+    public int loadIndiaCensusData(String... csvFilePath) throws CensusAnalyserException {
+        indiaCensusMap = new CensusLoader().loadCensusData(IndiaCensusCSV.class, csvFilePath);
         return indiaCensusMap.size();
     }
 
     /*Method To Load US Census Data*/
-    public int loadUSCensusData(String csvFilePath) throws CensusAnalyserException {
-        usCensusMap = new CensusLoader().loadCensusData(csvFilePath, USCensusCSV.class);
+    public int loadUSCensusData(String... csvFilePath) throws CensusAnalyserException {
+        usCensusMap = new CensusLoader().loadCensusData(USCensusCSV.class, csvFilePath);
         return usCensusMap.size();
     }
 
     /*Method to Load State Code*/
-    public int loadStateCode(String csvFilePath) throws CensusAnalyserException {
-        return new CensusLoader().loadStateCodeData(csvFilePath,indiaCensusMap);
-    }
+//    public int loadStateCode(String csvFilePath) throws CensusAnalyserException {
+//        return new CensusLoader().loadStateCodeData(csvFilePath, indiaCensusMap);
+//    }
 
     /*Method to get US and Indian state for Most population by density */
     public String[] getMostPopulusStateByDensityForIndAndUS() throws CensusAnalyserException {
